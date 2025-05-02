@@ -1,333 +1,381 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔔 Join Channel to Unlock Download</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔔 Join Channel to Unlock Download</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
     :root {
-      --primary: #6366f1;
-      --secondary: #7c3aed;
-      --success: #22c55e;
-      --danger: #ef4444;
-      --bg: #f3f4f6;
-      --text-dark: #111827;
-      --text-light: #6b7280;
-      --card-bg: #ffffff;
+        --primary: #6366f1;
+        --secondary: #7c3aed;
+        --success: #22c55e;
+        --danger: #ef4444;
+        --bg: #f3f4f6;
+        --text-dark: #111827;
+        --text-light: #6b7280;
+        --card-bg: #ffffff;
+        --footer-bg: #1f2937;
     }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text-dark);
-      margin: 0;
-      padding: 20px;
+        font-family: 'Segoe UI', sans-serif;
+        background: var(--bg);
+        color: var(--text-dark);
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
+
     .container {
-      max-width: 600px;
-      margin: auto;
-      background: var(--card-bg);
-      padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      text-align: center;
+        max-width: 600px;
+        margin: auto;
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        text-align: center;
+        flex: 1;
     }
+
     h1 {
-      color: var(--primary);
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 25px;
+        text-align: center;
+        color: var(--primary);
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 25px;
     }
+
     .step {
-      background: #f9fafb;
-      border-left: 5px solid transparent;
-      padding: 18px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
-      text-align: left;
+        background: #f9fafb;
+        border-left: 5px solid transparent;
+        padding: 18px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+        text-align: left;
     }
-    .step.active { border-left-color: var(--primary); background: #eef2ff; }
-    .step.completed { border-left-color: var(--success); background: #ecfdf5; }
+
+    .step.active {
+        border-left-color: var(--primary);
+        background: #eef2ff;
+    }
+
+    .step.completed {
+        border-left-color: var(--success);
+        background: #ecfdf5;
+    }
+
     .btn {
-      padding: 12px 20px;
-      border-radius: 999px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      display: inline-block;
-      margin: 12px auto;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      display: block;
-      width: fit-content;
+        padding: 12px 20px;
+        border-radius: 999px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        display: inline-block;
+        margin: 12px auto;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        display: block;
+        width: fit-content;
     }
-    .btn:hover { transform: scale(1.05); }
-    .btn-join { background: var(--primary); color: white; }
-    .btn-join:hover { background: #4f46e5; }
+
+    .btn:hover {
+        transform: scale(1.05);
+    }
+
+    .btn-join {
+        background: var(--primary);
+        color: white;
+    }
+
+    .btn-join:hover {
+        background: #4f46e5;
+    }
+
     .btn-download {
-      background: var(--success);
-      color: white;
-      display: none;
-      margin-top: 20px;
+        background: var(--success);
+        color: white;
+        display: none;
+        margin-top: 20px;
     }
+
     .status {
-      padding: 10px 15px;
-      border-radius: 8px;
-      margin-top: 12px;
-      font-size: 15px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-top: 12px;
+        font-size: 15px;
     }
-    .status.verifying { background: #fef9c3; color: #92400e; }
+
+    .status.verifying {
+        background: #fef9c3;
+        color: #92400e;
+    }
+
     .status.success {
-      background: #dcfce7;
-      color: var(--success);
-      display: none;
+        background: #dcfce7;
+        color: var(--success);
+        display: none;
     }
+
     .verification-timer {
-      background: var(--secondary);
-      padding: 6px 14px;
-      border-radius: 20px;
-      color: white;
-      font-weight: 600;
-      font-size: 14px;
-      display: inline-block;
-      margin: 10px 0;
+        background: var(--secondary);
+        padding: 6px 14px;
+        border-radius: 20px;
+        color: white;
+        font-weight: 600;
+        font-size: 14px;
+        display: inline-block;
+        margin: 10px 0;
     }
+
     .timer {
-      text-align: center;
-      margin: 18px 0;
-      font-size: 15px;
-      color: var(--text-light);
-      display: none;
+        text-align: center;
+        margin: 18px 0;
+        font-size: 15px;
+        color: var(--text-light);
     }
+
+    #download-btn {
+        display: none;
+    }
+
     .toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1f2937;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
-      display: none;
-      z-index: 9999;
-      animation: fadeIn 0.4s ease;
+        position: fixed;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1f2937;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 10px;
+        display: none;
+        z-index: 9999;
+        animation: fadeIn 0.4s ease;
     }
+
+    .ready-indicator {
+        display: inline-block;
+        margin-left: 8px;
+        animation: bounce 1s infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px); }
+    }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, 20px); }
-      to { opacity: 1; transform: translate(-50%, 0); }
+        from { opacity: 0; transform: translate(-50%, 20px); }
+        to { opacity: 1; transform: translate(-50%, 0); }
     }
-  </style>
+
+    footer {
+        background: var(--footer-bg);
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 30px;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 15px;
+    }
+
+    .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary);
+        transform: translateY(-2px);
+    }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1><i class="fab fa-youtube"></i> Unlock Your Download</h1>
-    
-    <div class="step" id="join-step">
-      <h3><span class="step-number">1</span> Join Our Channel</h3>
-      <p>Click below to join <span class="channel-name">Sktech_000</span>:</p>
-      <a href="https://www.youtube.com/channel/sktech_000?sub_confirmation=1" 
-         target="_blank" 
-         class="btn btn-join" 
-         id="join-btn">
-         <i class="fab fa-youtube"></i> Subscribe Channel
-      </a>
-    </div>
-
-    <div class="step" id="verify-step">
-      <h3><span class="step-number">2</span> Complete Verification</h3>
-      <div class="status verifying">
-        <p><i class="fas fa-circle-notch fa-spin"></i> Please wait: 
-          <span class="verification-timer" id="verification-countdown">5</span> seconds
-        </p>
-      </div>
-      <button id="verify-btn" class="btn btn-join" style="display:none;">
-        <i class="fas fa-check-circle"></i> Verify Subscription
-      </button>
-    </div>
-
-    <div id="timer" class="timer">
-      <i class="fas fa-clock"></i> Download unlocks in: <span id="countdown">20</span> seconds
-    </div>
-
-    <div id="success-status" class="status success">
-      <i class="fas fa-check-circle"></i> Verification complete! You can now download.
-    </div>
-
-    <div style="text-align: center; margin-top: 30px;">
-      <a href="#" id="download-btn" class="btn btn-download" target="_blank">
-        <i class="fas fa-download"></i> Download Now
-      </a>
-    </div>
-  </div>
-
-  <div id="toast" class="toast">
-    <i class="fas fa-bell bell-icon"></i>
-    <span id="toast-message">Please subscribe and click bell icon first!</span>
-  </div>
-<script>
-  // Configuration
-const VERIFICATION_WAIT_TIME = 5; // 5 seconds wait for testing
-const COUNTDOWN_TIME = 20; // 20 seconds countdown
-
-// DOM Elements
-const joinBtn = document.getElementById('join-btn');
-const verifyBtn = document.getElementById('verify-btn');
-const joinStep = document.getElementById('join-step');
-const verifyStep = document.getElementById('verify-step');
-const verificationCountdown = document.getElementById('verification-countdown');
-const timerElement = document.getElementById('timer');
-const countdownElement = document.getElementById('countdown');
-const successStatus = document.getElementById('success-status');
-const downloadBtn = document.getElementById('download-btn');
-const toast = document.getElementById('toast');
-const toastMessage = document.getElementById('toast-message');
-
-// State management
-let hasJoined = false;
-let verificationTimer;
-let countdownTimer;
-let verificationSecondsLeft = VERIFICATION_WAIT_TIME;
-let downloadUrl = '#'; // Default fallback URL
-
-// 📁 Load links from JSON
-async function loadLinks() {
-    try {
-        // Use absolute path to your JSON file
-        const response = await fetch('https://raw.githubusercontent.com/Sahitya000/sub4sub/main/links.json');
-        if (!response.ok) throw new Error("Failed to load links");
-        return await response.json();
-    } catch (error) {
-        console.error("Error loading links.json:", error);
-        // Fallback links if JSON fails to load
-        return {
-            "test": "https://example.com/fallback-download-link",
-            "demo": "https://example.com/another-fallback-link"
-        };
-    }
-}
-
-// 🔗 Get original URL from shortlink parameter
-async function resolveDownloadUrl() {
-    try {
-        const params = new URLSearchParams(window.location.search);
-        const shortLink = params.get('l');
+    <div class="container">
+        <h1><i class="fab fa-youtube"></i> Unlock Your Download</h1>
         
-        if (!shortLink) {
-            console.error("No shortlink parameter found");
-            return '#';
+        <div class="step" id="join-step">
+            <h3><span class="step-number">1</span> Join Our Channel</h3>
+            <p>Click below to join <span class="channel-name">Sktech_000</span>:</p>
+            <a href="https://www.youtube.com/channel/sktech_000?sub_confirmation=1" 
+               target="_blank" 
+               class="btn btn-join" 
+               id="join-btn">
+               <i class="fab fa-youtube"></i> Subscribe Channel
+            </a>
+        </div>
+        
+        <div class="step" id="verify-step">
+            <h3><span class="step-number">2</span> Complete Verification</h3>
+            <div class="status verifying" id="wait-message">
+                <p><i class="fas fa-circle-notch fa-spin"></i> Please wait: 
+                   <span class="verification-timer" id="verification-countdown">5</span> seconds</p>
+            </div>
+            
+            <div id="ready-message" style="display: none;">
+                <p><i class="fas fa-check-circle"></i> Ready to verify 
+                   <span class="ready-indicator"><i class="fas fa-arrow-down"></i></span></p>
+            </div>
+            
+            <button id="verify-btn" class="btn btn-join">
+                <i class="fas fa-check-circle"></i> Verify Subscription
+            </button>
+        </div>
+        
+        <div id="timer" class="timer" style="display: none;">
+            <i class="fas fa-clock"></i> Download unlocks in: <span id="countdown">20</span> seconds
+        </div>
+        
+        <div id="success-status" class="status success">
+            <i class="fas fa-check-circle"></i> Verification complete! You can now download.
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="#" id="download-btn" class="btn btn-download">
+                <i class="fas fa-download"></i> Download Now
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 Sktech_000. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+            <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-bell bell-icon"></i>
+        <span id="toast-message">Please subscribe and click bell icon first!</span>
+    </div>
+
+    <script>
+        // Configuration
+        const VERIFICATION_WAIT_TIME = 5; // 5 seconds wait for testing
+        const COUNTDOWN_TIME = 20; // 20 seconds countdown
+        const STATIC_DOWNLOAD_LINK = "https://example.com/your-file.zip"; // YOUR STATIC LINK HERE
+        
+        // DOM Elements
+        const joinBtn = document.getElementById('join-btn');
+        const verifyBtn = document.getElementById('verify-btn');
+        const joinStep = document.getElementById('join-step');
+        const verifyStep = document.getElementById('verify-step');
+        const verificationCountdown = document.getElementById('verification-countdown');
+        const timerElement = document.getElementById('timer');
+        const countdownElement = document.getElementById('countdown');
+        const successStatus = document.getElementById('success-status');
+        const downloadBtn = document.getElementById('download-btn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+        const waitMessage = document.getElementById('wait-message');
+        const readyMessage = document.getElementById('ready-message');
+        
+        // State management
+        let hasJoined = false;
+        let verificationTimer;
+        let countdownTimer;
+        let verificationSecondsLeft = VERIFICATION_WAIT_TIME;
+        
+        // Initialize download button with static link
+        downloadBtn.href = STATIC_DOWNLOAD_LINK;
+        
+        // 🕒 Start verification wait timer
+        function startVerificationWait() {
+            verifyBtn.style.display = 'inline-block';
+            verifyStep.classList.add('active');
+            
+            verificationTimer = setInterval(() => {
+                verificationSecondsLeft--;
+                verificationCountdown.textContent = verificationSecondsLeft;
+                
+                if (verificationSecondsLeft <= 0) {
+                    clearInterval(verificationTimer);
+                    enableVerification();
+                }
+            }, 1000);
         }
         
-        const links = await loadLinks();
-        return links[shortLink] || '#';
-    } catch (error) {
-        console.error("Error resolving URL:", error);
-        return '#';
-    }
-}
-
-// 🕒 Start verification wait timer
-function startVerificationWait() {
-    verifyBtn.style.display = 'inline-block';
-    verifyStep.classList.add('active');
-    
-    verificationTimer = setInterval(() => {
-        verificationSecondsLeft--;
-        verificationCountdown.textContent = verificationSecondsLeft;
-        
-        if (verificationSecondsLeft <= 0) {
-            clearInterval(verificationTimer);
-            enableVerification();
+        // ✅ Enable verification button
+        function enableVerification() {
+            verifyBtn.disabled = false;
+            verificationCountdown.textContent = "Ready!";
+            verificationCountdown.style.background = "#22c55e";
+            
+            // Hide wait message and show ready message
+            waitMessage.style.display = 'none';
+            readyMessage.style.display = 'block';
         }
-    }, 1000);
-}
-
-// ✅ Enable verification button
-function enableVerification() {
-    verifyBtn.disabled = false;
-    verificationCountdown.textContent = "Ready!";
-    verificationCountdown.style.background = "#22c55e";
-}
-
-// ⏳ Start download countdown
-function startDownloadCountdown() {
-    let seconds = COUNTDOWN_TIME;
-    timerElement.style.display = 'block';
-    
-    countdownTimer = setInterval(() => {
-        seconds--;
-        countdownElement.textContent = seconds;
         
-        if (seconds <= 0) {
-            clearInterval(countdownTimer);
-            showDownload();
+        // ⏳ Start download countdown
+        function startDownloadCountdown() {
+            let seconds = COUNTDOWN_TIME;
+            timerElement.style.display = 'block';
+            
+            countdownTimer = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownTimer);
+                    showDownload();
+                }
+            }, 1000);
         }
-    }, 1000);
-}
-
-// 🔓 Show download button with proper link
-async function showDownload() {
-    try {
-        downloadUrl = await resolveDownloadUrl();
-        console.log("Download URL resolved:", downloadUrl);
         
-        if (downloadUrl && downloadUrl !== '#') {
-            downloadBtn.href = downloadUrl;
+        // 🔓 Show download button with static link
+        function showDownload() {
             downloadBtn.style.display = 'inline-block';
             timerElement.style.display = 'none';
             successStatus.style.display = 'block';
-        } else {
-            console.error("Invalid download URL");
-            showToast("Download link not found. Please try again.");
+            
+            // Add click event listener
+            downloadBtn.addEventListener('click', function() {
+                console.log("Redirecting to:", STATIC_DOWNLOAD_LINK);
+            });
         }
-    } catch (error) {
-        console.error("Error showing download:", error);
-        showToast("Error preparing download. Please refresh the page.");
-    }
-}
-
-// 🍞 Show toast notification
-function showToast(message) {
-    toastMessage.textContent = message;
-    toast.style.display = 'block';
-    setTimeout(() => {
-        toast.style.display = 'none';
-    }, 3000);
-}
-
-// 🎯 Event Listeners
-joinBtn.addEventListener('click', function() {
-    hasJoined = true;
-    joinStep.classList.add('completed');
-    startVerificationWait();
-});
-
-verifyBtn.addEventListener('click', function() {
-    if (verificationSecondsLeft > 0) {
-        showToast("Please wait " + verificationSecondsLeft + " more seconds");
-        return;
-    }
-    
-    verifyStep.classList.remove('active');
-    verifyStep.classList.add('completed');
-    verifyBtn.disabled = true;
-    startDownloadCountdown();
-});
-
-// Add click event listener to download button
-downloadBtn.addEventListener('click', function(e) {
-    if (downloadUrl === '#') {
-        e.preventDefault();
-        showToast("Download link not available. Please try again.");
-        console.error("Attempted download with invalid URL");
-    } else {
-        console.log("Redirecting to download URL:", downloadUrl);
-    }
-});
-
-// Debugging - log initial state
-console.log("Page loaded. Initial state ready.");
-</script>
+        
+        // 🍞 Show toast notification
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+        
+        // 🎯 Event Listeners
+        joinBtn.addEventListener('click', function() {
+            hasJoined = true;
+            joinStep.classList.add('completed');
+            startVerificationWait();
+        });
+        
+        verifyBtn.addEventListener('click', function() {
+            if (verificationSecondsLeft > 0) {
+                showToast("Please wait " + verificationSecondsLeft + " more seconds");
+                return;
+            }
+            
+            verifyStep.classList.remove('active');
+            verifyStep.classList.add('completed');
+            verifyBtn.disabled = true;
+            readyMessage.style.display = 'none';
+            startDownloadCountdown();
+        });
+    </script>
 </body>
 </html>
