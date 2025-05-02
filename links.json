@@ -1,5 +1,4 @@
 {
-    "test": "https://t.me/sktech_000",
-    "file1": "https://drive.google.com/your-file",
-    "video": "https://youtube.com/your-video"
+  "abc": "https://example.com/myfile.zip",
+  "yt": "https://youtube.com/..."
 }
