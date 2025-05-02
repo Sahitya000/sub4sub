@@ -1,4 +1,4 @@
-const GITHUB_REPO = "Sahitya000/sub4sub"; // 👈 change this to your GitHub repo
+const GITHUB_REPO = "Sahitya000/sub4sub"; // Replace with your GitHub repo
 
 // Check if this is a short link visit
 if (window.location.hash.startsWith('#/s/')) {
