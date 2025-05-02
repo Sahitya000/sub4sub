@@ -1,26 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sub4Sub Short Links</title>
-    <link rel="stylesheet" href="styles.css">
+  <title>Sub4Sub - SKMods</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="main-form">
-        <h1>Create Your Sub4Sub Short Link</h1>
-        <label for="link-input">Enter any link (YouTube, Telegram, etc.):</label>
-        <input type="text" id="link-input" placeholder="Enter URL">
-        <button onclick="createShortLink()">Create Short Link</button>
-        <div id="result"></div>
-    </div>
-    
-    <div id="redirect-section" style="display: none;">
-        <h2>Redirecting...</h2>
-        <p>Click below if you are not redirected automatically:</p>
-        <a id="redirect-link" href="#" target="_blank">Redirect Link</a>
-    </div>
+  <h1>Welcome to Sub4Sub</h1>
+  <p>Paste your YouTube channel link below to join the list:</p>
 
-    <script src="script.js"></script>
+  <input type="text" id="channelLink" placeholder="https://youtube.com/@yourchannel" />
+  <input type="text" id="channelName" placeholder="Your Channel Name" />
+  <button onclick="addChannel()">Add My Channel</button>
+
+  <h2>Active Channels:</h2>
+  <div id="channelList"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
