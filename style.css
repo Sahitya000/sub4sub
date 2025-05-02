@@ -1,64 +1,74 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
+    text-align: center;
+    background-color: #f4f4f4;
     padding: 20px;
-    line-height: 1.6;
 }
 
-.container {
-    max-width: 600px;
+#main-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
     margin: 0 auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.form-box {
-    margin: 20px 0;
+h1 {
+    color: #333;
 }
 
 input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 button {
-    background: #FF0000;
-    color: white;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
     border: none;
-    padding: 12px 25px;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
 }
 
-.result-box {
+button:hover {
+    background-color: #0056b3;
+}
+
+#error {
+    color: red;
+}
+
+#result {
     margin-top: 20px;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 4px;
 }
 
 .short-link {
-    background: #eee;
-    padding: 10px;
+    font-weight: bold;
+    color: #007BFF;
+    cursor: pointer;
     margin: 10px 0;
-    word-break: break-all;
 }
 
 .note {
-    font-size: 0.8em;
-    color: #666;
-    margin-top: 15px;
+    color: #777;
+    font-size: 12px;
 }
 
-.error {
+#error-message {
     color: red;
+    margin-top: 10px;
+}
+
+#redirect-section {
+    display: none;
+}
+
+#redirect-link {
+    color: #007BFF;
+    text-decoration: none;
 }
