@@ -211,8 +211,8 @@ h1 {
 
     <script>
         // Configuration
-        const VERIFICATION_WAIT_TIME = 20; // 30 seconds mandatory wait
-        const COUNTDOWN_TIME = 5; // 20 seconds countdown
+        const VERIFICATION_WAIT_TIME = 5; // 30 seconds mandatory wait
+        const COUNTDOWN_TIME = 20; // 20 seconds countdown
         
         // DOM Elements
         const joinBtn = document.getElementById('join-btn');
@@ -238,7 +238,7 @@ h1 {
         // 📁 Load links from JSON (for GitHub Pages)
         async function loadLinks() {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/username/repo/main/links.json');
+                const response = await fetch('https://raw.githubusercontent.com/Sahitya000/sub4sub/refs/heads/main/links.json');
                 if (!response.ok) throw new Error("Failed to load links");
                 return await response.json();
             } catch (error) {
