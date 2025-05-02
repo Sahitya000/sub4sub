@@ -17,8 +17,10 @@
     </div>
 
     <script>
+        // Extract shortId from URL hash
         const shortId = window.location.hash.substring(1);
-        
+
+        // Fetch the short links data from JSON file
         fetch('https://sahitya000.github.io/your-repo-name/short_links.json')
             .then(response => response.json())
             .then(data => {
@@ -30,6 +32,7 @@
                 }
             });
 
+        // Simulate subscription process
         document.getElementById('subscribeButton').addEventListener('click', function() {
             // Simulating subscription (this part should be connected to actual subscription check)
             document.getElementById('subscriptionStatus').style.display = 'none';
