@@ -8,7 +8,7 @@ async function createShortLink() {
 
   const id = Math.random().toString(36).substring(2, 8);
   const fileUrl = "https://api.github.com/repos/Sahitya000/sub4sub/contents/links.json";
-  const token = "YOUR_GITHUB_TOKEN"; // 👈 Apna token yahan paste karein
+  const token = "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"; // 👈 Apna token yahan paste karein
 
   const fileRes = await fetch(fileUrl, {
     headers: { Authorization: `token ${token}` }
