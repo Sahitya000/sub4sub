@@ -1,31 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Redirecting...</title>
+  <meta charset="UTF-8">
+  <title>Subscribe to Continue</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h3>Redirecting, please wait...</h3>
-  <p id="status">Validating link...</p>
+  <div class="container">
+    <h2>🎥 Subscribe to Unlock the Link</h2>
+    <a href="https://youtube.com/channel/YOUR_CHANNEL_ID" target="_blank">
+      <button onclick="startTimer()">Subscribe & Continue</button>
+    </a>
+    <div id="timer" style="display:none;">
+      ⏳ Wait for <span id="countdown">10</span> seconds...
+    </div>
+    <p id="downloadLink"></p>
+  </div>
 
   <script>
-    const id = location.hash.replace("#", "");
+    const id = new URLSearchParams(location.search).get('id');
+    const apiUrl = "https://api.github.com/repos/Sahitya000/sub4sub/contents/links.json";
 
-    fetch("links.json")
-      .then(res => res.json())
-      .then(data => {
-        if (data[id]) {
-          document.getElementById("status").textContent = `Found link: ${data[id].name}. Redirecting in 10 seconds...`;
-          setTimeout(() => {
-            window.location.href = data[id].url;
-          }, 10000);
-        } else {
-          document.getElementById("status").textContent = "Invalid or expired short link.";
+    fetch(apiUrl, {
+      headers: { Accept: "application/vnd.github.v3.raw" }
+    })
+    .then(res => res.json())
+    .then(data => {
+      const linkObj = data[id];
+      if (!linkObj) {
+        document.body.innerHTML = "<h3>❌ Invalid or expired link.</h3>";
+        return;
+      }
+      window.linkData = linkObj.url;
+    });
+
+    function startTimer() {
+      document.getElementById("timer").style.display = "block";
+      let seconds = 10;
+      const interval = setInterval(() => {
+        document.getElementById("countdown").textContent = seconds;
+        seconds--;
+        if (seconds < 0) {
+          clearInterval(interval);
+          document.getElementById("downloadLink").innerHTML =
+            `<a href="${window.linkData}" class="download-btn" target="_blank">✅ Download Now</a>`;
         }
-      })
-      .catch(() => {
-        document.getElementById("status").textContent = "Error loading data.";
-      });
+      }, 1000);
+    }
   </script>
 </body>
 </html>
