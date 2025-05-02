@@ -1,47 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Short Link Generator</title>
-  <meta charset="UTF-8" />
-  <style>
-    body { font-family: sans-serif; padding: 20px; }
-    input, button { padding: 10px; margin: 5px 0; width: 100%; }
-  </style>
+  <meta charset="UTF-8">
+  <title>Shortlink Generator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <h2>Short Link Generator</h2>
-  <input type="text" id="url" placeholder="Enter original URL" />
-  <input type="text" id="name" placeholder="Enter link name (for tracking)" />
-  <button onclick="generateShortLink()">Generate</button>
-  <p id="result"></p>
-
-  <script>
-    function generateID(length = 6) {
-      const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-      let id = '';
-      for (let i = 0; i < length; i++) id += chars[Math.floor(Math.random() * chars.length)];
-      return id;
-    }
-
-    async function generateShortLink() {
-      const url = document.getElementById("url").value;
-      const name = document.getElementById("name").value;
-      if (!url || !name) return alert("Please enter both fields.");
-
-      const id = generateID();
-      const shortLink = `${location.origin}/redirect.html#${id}`;
-
-      const linkData = {
-        [id]: { url, name }
-      };
-
-      // Display result (manually copy to JSON)
-      document.getElementById("result").innerHTML = `
-        <strong>Short Link:</strong> <a href="${shortLink}" target="_blank">${shortLink}</a><br>
-        <strong>JSON Snippet to Add in links.json:</strong><br>
-        <pre>${JSON.stringify(linkData, null, 2).replace(/[{}]/g, '')},</pre>
-      `;
-    }
-  </script>
+  <div class="container">
+    <h1>🔗 Shortlink Generator</h1>
+    <input type="text" id="titleInput" placeholder="Link ka naam (e.g. Kinemaster APK)">
+    <input type="url" id="linkInput" placeholder="Download link">
+    <button onclick="createShortLink()">Generate Shortlink</button>
+    <p id="shortResult"></p>
+  </div>
 </body>
 </html>
