@@ -1,36 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+  <title>Short Link Generator</title>
+  <meta charset="UTF-8" />
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input, button { padding: 10px; margin: 5px 0; width: 100%; }
+  </style>
 </head>
 <body>
-    <h1>Redirecting to Original Link</h1>
-    <div id="errorMessage" style="display: none;">
-        <p>Sorry, this link is not valid or expired.</p>
-    </div>
+  <h2>Short Link Generator</h2>
+  <input type="text" id="url" placeholder="Enter original URL" />
+  <input type="text" id="name" placeholder="Enter link name (for tracking)" />
+  <button onclick="generateShortLink()">Generate</button>
+  <p id="result"></p>
 
-    <script>
-        // Get the short link ID from the URL
-        const shortId = window.location.hash.substring(1);
+  <script>
+    function generateID(length = 6) {
+      const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      let id = '';
+      for (let i = 0; i < length; i++) id += chars[Math.floor(Math.random() * chars.length)];
+      return id;
+    }
 
-        // Fetch the short links data from JSON file
-        fetch('https://sahitya000.github.io/sub4sub/short_links.json')
-            .then(response => response.json())
-            .then(data => {
-                if (data[shortId]) {
-                    const { url } = data[shortId];
+    async function generateShortLink() {
+      const url = document.getElementById("url").value;
+      const name = document.getElementById("name").value;
+      if (!url || !name) return alert("Please enter both fields.");
 
-                    // Redirect the user after 2 seconds
-                    setTimeout(() => {
-                        window.location.href = url;
-                    }, 2000);
-                } else {
-                    // Show error message if short ID not found
-                    document.getElementById('errorMessage').style.display = 'block';
-                }
-            });
-    </script>
+      const id = generateID();
+      const shortLink = `${location.origin}/redirect.html#${id}`;
+
+      const linkData = {
+        [id]: { url, name }
+      };
+
+      // Display result (manually copy to JSON)
+      document.getElementById("result").innerHTML = `
+        <strong>Short Link:</strong> <a href="${shortLink}" target="_blank">${shortLink}</a><br>
+        <strong>JSON Snippet to Add in links.json:</strong><br>
+        <pre>${JSON.stringify(linkData, null, 2).replace(/[{}]/g, '')},</pre>
+      `;
+    }
+  </script>
 </body>
 </html>
