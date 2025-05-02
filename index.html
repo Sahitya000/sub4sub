@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sub4Sub Link Shortener</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <!-- Main Form -->
+        <div id="main-form">
+            <h1>🔗 Sub4Sub Link Shortener</h1>
+            <p>Get a short link after subscribing to my channel</p>
+            
+            <div class="form-box">
+                <input type="text" id="youtube-link" placeholder="Paste your YouTube channel link">
+                <button onclick="createShortLink()">Generate Short Link</button>
+            </div>
+            
+            <div id="result" class="result-box"></div>
+        </div>
+        
+        <!-- Hidden redirect section -->
+        <div id="redirect-section" style="display:none;">
+            <h2>Redirecting to YouTube...</h2>
+            <p>If not redirected automatically, <a id="redirect-link" href="#">click here</a>.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
