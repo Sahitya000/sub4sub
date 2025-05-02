@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sub4Sub - SKMods</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+  <title>Short Link Generator</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    input, button { width: 100%; padding: 10px; margin: 8px 0; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 6px; }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Sub4Sub</h1>
-  <p>Paste your YouTube channel link below to join the list:</p>
+  <h2>Create Short Link</h2>
+  <input type="text" id="linkName" placeholder="Enter Link Name (e.g. YouTube Premium)" />
+  <input type="text" id="longUrl" placeholder="Paste Original Link" />
+  <button onclick="generateShort()">Generate Short Link</button>
+  <pre id="shortResult"></pre>
 
-  <input type="text" id="channelLink" placeholder="https://youtube.com/@yourchannel" />
-  <input type="text" id="channelName" placeholder="Your Channel Name" />
-  <button onclick="addChannel()">Add My Channel</button>
+  <script>
+    function generateShort() {
+      const url = document.getElementById("longUrl").value.trim();
+      const name = document.getElementById("linkName").value.trim();
+      if (!url || !name) {
+        alert("Please enter both name and URL");
+        return;
+      }
 
-  <h2>Active Channels:</h2>
-  <div id="channelList"></div>
+      const id = Math.random().toString(36).substring(2, 8);
+      const shortLink = `${location.origin}/#${id}`;
+      const jsonSnippet = `"${id}": {\n  "name": "${name}",\n  "url": "${url}"\n}`;
 
-  <script src="script.js"></script>
+      document.getElementById("shortResult").textContent =
+        `Short Link: ${shortLink}\n\nAdd this to your JSON:\n\n${jsonSnippet}`;
+    }
+  </script>
 </body>
 </html>
