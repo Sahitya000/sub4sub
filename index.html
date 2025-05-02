@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Short Link Generator</title>
-  <style>
-    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
-    input, button { width: 100%; padding: 10px; margin: 8px 0; }
-    pre { background: #f4f4f4; padding: 10px; border-radius: 6px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short Link Generator</title>
 </head>
 <body>
-  <h2>Create Short Link</h2>
-  <input type="text" id="linkName" placeholder="Enter Link Name (e.g. YouTube Premium)" />
-  <input type="text" id="longUrl" placeholder="Paste Original Link" />
-  <button onclick="generateShort()">Generate Short Link</button>
-  <pre id="shortResult"></pre>
+    <h1>Generate Short Link</h1>
+    <form id="shortLinkForm">
+        <label for="url">Original URL:</label>
+        <input type="text" id="url" required>
+        <label for="name">Link Name:</label>
+        <input type="text" id="name" required>
+        <button type="submit">Generate Short Link</button>
+    </form>
 
-  <script>
-    function generateShort() {
-      const url = document.getElementById("longUrl").value.trim();
-      const name = document.getElementById("linkName").value.trim();
-      if (!url || !name) {
-        alert("Please enter both name and URL");
-        return;
-      }
+    <h2>Generated Short Link:</h2>
+    <p id="shortLink"></p>
 
-      const id = Math.random().toString(36).substring(2, 8);  // Random ID for short link
-      const shortLink = `${location.origin}/redirect.html#${id}`;  // Ensure the correct page and hash
-      const jsonSnippet = `"${id}": {\n  "name": "${name}",\n  "url": "${url}"\n}`;
+    <script>
+        document.getElementById('shortLinkForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('url').value;
+            const name = document.getElementById('name').value;
+            const shortId = btoa(name); // Create short ID based on name
+            const shortLink = `https://sahitya000.github.io/your-repo-name/redirect.html#${shortId}`;
 
-      document.getElementById("shortResult").textContent =
-        `Short Link: ${shortLink}\n\nAdd this to your JSON:\n\n${jsonSnippet}`;
-    }
-  </script>
+            document.getElementById('shortLink').textContent = shortLink;
+
+            // Save the short link to JSON file (simulated in a real project with server-side code)
+            console.log('Short link created:', shortLink);
+        });
+    </script>
 </body>
 </html>
