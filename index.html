@@ -5,160 +5,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🔔 Join Channel to Unlock Download</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-        <style>
+    <style>
     :root {
-    --primary: #6366f1;
-    --secondary: #7c3aed;
-    --success: #22c55e;
-    --danger: #ef4444;
-    --bg: #f3f4f6;
-    --text-dark: #111827;
-    --text-light: #6b7280;
-    --card-bg: #ffffff;
-}
+        --primary: #6366f1;
+        --secondary: #7c3aed;
+        --success: #22c55e;
+        --danger: #ef4444;
+        --bg: #f3f4f6;
+        --text-dark: #111827;
+        --text-light: #6b7280;
+        --card-bg: #ffffff;
+    }
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text-dark);
-    margin: 0;
-    padding: 20px;
-}
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: var(--bg);
+        color: var(--text-dark);
+        margin: 0;
+        padding: 20px;
+    }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: var(--card-bg);
-    padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    text-align: center;
-}
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        text-align: center;
+    }
 
-h1 {
-    text-align: center;
-    color: var(--primary);
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 25px;
-}
+    h1 {
+        text-align: center;
+        color: var(--primary);
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
 
-.step {
-    background: #f9fafb;
-    border-left: 5px solid transparent;
-    padding: 18px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-    text-align: left;
-}
+    .step {
+        background: #f9fafb;
+        border-left: 5px solid transparent;
+        padding: 18px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+        text-align: left;
+    }
 
-.step.active {
-    border-left-color: var(--primary);
-    background: #eef2ff;
-}
+    .step.active {
+        border-left-color: var(--primary);
+        background: #eef2ff;
+    }
 
-.step.completed {
-    border-left-color: var(--success);
-    background: #ecfdf5;
-}
+    .step.completed {
+        border-left-color: var(--success);
+        background: #ecfdf5;
+    }
 
-.btn {
-    padding: 12px 20px;
-    border-radius: 999px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    display: inline-block;
-    margin: 12px auto;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    display: block;
-    width: fit-content;
-}
+    .btn {
+        padding: 12px 20px;
+        border-radius: 999px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        display: inline-block;
+        margin: 12px auto;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        display: block;
+        width: fit-content;
+    }
 
-.btn:hover {
-    transform: scale(1.05);
-}
+    .btn:hover {
+        transform: scale(1.05);
+    }
 
-.btn-join {
-    background: var(--primary);
-    color: white;
-}
+    .btn-join {
+        background: var(--primary);
+        color: white;
+    }
 
-.btn-join:hover {
-    background: #4f46e5;
-}
+    .btn-join:hover {
+        background: #4f46e5;
+    }
 
-.btn-download {
-    background: var(--success);
-    color: white;
-    display: none;
-    margin-top: 20px;
-}
+    .btn-download {
+        background: var(--success);
+        color: white;
+        display: none;
+        margin-top: 20px;
+    }
 
-.status {
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-top: 12px;
-    font-size: 15px;
-}
+    .status {
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-top: 12px;
+        font-size: 15px;
+    }
 
-.status.verifying {
-    background: #fef9c3;
-    color: #92400e;
-}
+    .status.verifying {
+        background: #fef9c3;
+        color: #92400e;
+    }
 
-.status.success {
-    background: #dcfce7;
-    color: var(--success);
-    display: none;
-}
+    .status.success {
+        background: #dcfce7;
+        color: var(--success);
+        display: none;
+    }
 
-.verification-timer {
-    background: var(--secondary);
-    padding: 6px 14px;
-    border-radius: 20px;
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    display: inline-block;
-    margin: 10px 0;
-}
+    .verification-timer {
+        background: var(--secondary);
+        padding: 6px 14px;
+        border-radius: 20px;
+        color: white;
+        font-weight: 600;
+        font-size: 14px;
+        display: inline-block;
+        margin: 10px 0;
+    }
 
-.timer {
-    text-align: center;
-    margin: 18px 0;
-    font-size: 15px;
-    color: var(--text-light);
-}
+    .timer {
+        text-align: center;
+        margin: 18px 0;
+        font-size: 15px;
+        color: var(--text-light);
+    }
 
-#download-btn {
-    display: none;
-}
+    #download-btn {
+        display: none;
+    }
 
-.toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1f2937;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 10px;
-    display: none;
-    z-index: 9999;
-    animation: fadeIn 0.4s ease;
-}
+    .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1f2937;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 10px;
+        display: none;
+        z-index: 9999;
+        animation: fadeIn 0.4s ease;
+    }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translate(-50%, 20px); }
-    to { opacity: 1; transform: translate(-50%, 0); }
-}
-
-</style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translate(-50%, 20px); }
+        to { opacity: 1; transform: translate(-50%, 0); }
+    }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -166,7 +164,7 @@ h1 {
         
         <div class="step" id="join-step">
             <h3><span class="step-number">1</span> Join Our Channel</h3>
-            <p>Click below to join  <span class="channel-name"> </span>Sktech_000:</p>
+            <p>Click below to join <span class="channel-name">Sktech_000</span>:</p>
             <a href="https://www.youtube.com/channel/sktech_000?sub_confirmation=1" 
                target="_blank" 
                class="btn btn-join" 
@@ -179,8 +177,7 @@ h1 {
             <h3><span class="step-number">2</span> Complete Verification</h3>
             <div class="status verifying">
                 <p><i class="fas fa-circle-notch fa-spin"></i> Please wait: 
-                   <span class="verification-timer" id="verification-countdown">30</span> seconds</p>
-                
+                   <span class="verification-timer" id="verification-countdown">5</span> seconds</p>
             </div>
             
             <button id="verify-btn" class="btn btn-join">
@@ -211,7 +208,7 @@ h1 {
 
     <script>
         // Configuration
-        const VERIFICATION_WAIT_TIME = 5; // 30 seconds mandatory wait
+        const VERIFICATION_WAIT_TIME = 5; // 5 seconds wait for testing (change to 30 for production)
         const COUNTDOWN_TIME = 20; // 20 seconds countdown
         
         // DOM Elements
@@ -229,33 +226,40 @@ h1 {
         
         // State management
         let hasJoined = false;
-        let isVerifying = false;
         let verificationTimer;
         let countdownTimer;
         let verificationSecondsLeft = VERIFICATION_WAIT_TIME;
         
         // 📁 Load links from JSON
-        // 📁 Load links from JSON (for GitHub Pages)
         async function loadLinks() {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/Sahitya000/sub4sub/refs/heads/main/links.json');
+                // Use absolute path to your JSON file
+                const response = await fetch('https://raw.githubusercontent.com/Sahitya000/sub4sub/main/links.json');
                 if (!response.ok) throw new Error("Failed to load links");
-                return await response.json();
+                const data = await response.json();
+                console.log("Loaded links:", data); // Debug log
+                return data;
             } catch (error) {
-                console.error("Using fallback links:", error);
+                console.error("Error loading links.json:", error);
+                // Fallback links if JSON fails to load
                 return {
-                    "test": "https://example.com/your-real-download-link",
-                    "demo": "https://example.com/another-link"
+                    "test": "https://example.com/fallback-download-link",
+                    "demo": "https://example.com/another-fallback-link"
                 };
             }
         }
         
-        // 🔗 Get original URL from shortlink
+        // 🔗 Get original URL from shortlink parameter
         async function getOriginalUrl() {
             const params = new URLSearchParams(window.location.search);
             const shortLink = params.get('l');
+            console.log("Shortlink parameter:", shortLink); // Debug log
+            
             const links = await loadLinks();
-            return links[shortLink] || '#';
+            const originalUrl = links[shortLink] || '#';
+            
+            console.log("Original URL resolved:", originalUrl); // Debug log
+            return originalUrl;
         }
         
         // 🕒 Start verification wait timer
@@ -278,7 +282,7 @@ h1 {
         function enableVerification() {
             verifyBtn.disabled = false;
             verificationCountdown.textContent = "Ready!";
-            verificationCountdown.style.background = "#4CAF50";
+            verificationCountdown.style.background = "#22c55e"; // Green color
         }
         
         // ⏳ Start download countdown
@@ -297,12 +301,30 @@ h1 {
             }, 1000);
         }
         
-        // 🔓 Show download button
+        // 🔓 Show download button with proper link
         async function showDownload() {
-            timerElement.style.display = 'none';
-            successStatus.style.display = 'block';
-            downloadBtn.href = await getOriginalUrl();
-            downloadBtn.style.display = 'inline-block';
+            try {
+                const originalUrl = await getOriginalUrl();
+                console.log("Setting download link to:", originalUrl); // Debug log
+                
+                if (originalUrl && originalUrl !== '#') {
+                    downloadBtn.href = originalUrl;
+                    downloadBtn.style.display = 'inline-block';
+                    timerElement.style.display = 'none';
+                    successStatus.style.display = 'block';
+                    
+                    // For debugging - log when button is clicked
+                    downloadBtn.addEventListener('click', function(e) {
+                        console.log("Download button clicked, redirecting to:", originalUrl);
+                    });
+                } else {
+                    console.error("Invalid download URL");
+                    showToast("Download link not found. Please try again.");
+                }
+            } catch (error) {
+                console.error("Error showing download:", error);
+                showToast("Error preparing download. Please refresh the page.");
+            }
         }
         
         // 🍞 Show toast notification
@@ -323,7 +345,7 @@ h1 {
         
         verifyBtn.addEventListener('click', function() {
             if (verificationSecondsLeft > 0) {
-                showToast("Please wait " + verificationSecondsLeft + " more seconds and click the bell icon 🔔");
+                showToast("Please wait " + verificationSecondsLeft + " more seconds");
                 return;
             }
             
@@ -333,13 +355,8 @@ h1 {
             startDownloadCountdown();
         });
 
-        // Prevent window close during verification
-        window.addEventListener('beforeunload', function(e) {
-            if (hasJoined && !downloadBtn.style.display) {
-                e.preventDefault();
-                e.returnValue = 'Are you sure you want to leave? Your download is not ready yet.';
-            }
-        });
+        // Debugging - log initial state
+        console.log("Page loaded. Initial state ready.");
     </script>
 </body>
 </html>
