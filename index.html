@@ -166,8 +166,8 @@ h1 {
         
         <div class="step" id="join-step">
             <h3><span class="step-number">1</span> Join Our Channel</h3>
-            <p>Click below to join <span class="channel-name">Your Channel Name</span> on YouTube:</p>
-            <a href="https://www.youtube.com/channel/YOUR_CHANNEL_ID?sub_confirmation=1" 
+            <p>Click below to join  <span class="channel-name"> </span>Sktech_000:</p>
+            <a href="https://www.youtube.com/channel/sktech_000?sub_confirmation=1" 
                target="_blank" 
                class="btn btn-join" 
                id="join-btn">
@@ -211,8 +211,8 @@ h1 {
 
     <script>
         // Configuration
-        const VERIFICATION_WAIT_TIME = 30; // 30 seconds mandatory wait
-        const COUNTDOWN_TIME = 20; // 20 seconds countdown
+        const VERIFICATION_WAIT_TIME = 20; // 30 seconds mandatory wait
+        const COUNTDOWN_TIME = 5; // 20 seconds countdown
         
         // DOM Elements
         const joinBtn = document.getElementById('join-btn');
@@ -235,14 +235,17 @@ h1 {
         let verificationSecondsLeft = VERIFICATION_WAIT_TIME;
         
         // 📁 Load links from JSON
+        // 📁 Load links from JSON (for GitHub Pages)
         async function loadLinks() {
             try {
-                const response = await fetch('links.json');
+                const response = await fetch('https://raw.githubusercontent.com/username/repo/main/links.json');
+                if (!response.ok) throw new Error("Failed to load links");
                 return await response.json();
             } catch (error) {
                 console.error("Using fallback links:", error);
                 return {
-                    "test": "https://example.com/your-download-link"
+                    "test": "https://example.com/your-real-download-link",
+                    "demo": "https://example.com/another-link"
                 };
             }
         }
