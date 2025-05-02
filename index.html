@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Short Link Generator</title>
+    <title>Redirecting...</title>
 </head>
 <body>
-    <h1>Generate Short Link</h1>
-    <form id="shortLinkForm">
-        <label for="url">Original URL:</label>
-        <input type="text" id="url" required>
-        <label for="name">Link Name:</label>
-        <input type="text" id="name" required>
-        <button type="submit">Generate Short Link</button>
-    </form>
-
-    <h2>Generated Short Link:</h2>
-    <p id="shortLink"></p>
+    <h1>Redirecting to Original Link</h1>
+    <div id="errorMessage" style="display: none;">
+        <p>Sorry, this link is not valid or expired.</p>
+    </div>
 
     <script>
-        document.getElementById('shortLinkForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const url = document.getElementById('url').value;
-            const name = document.getElementById('name').value;
-            const shortId = btoa(name); // Create short ID based on name
-            const shortLink = `https://sahitya000.github.io/sub4sub/redirect.html#${shortId}`;
+        // Get the short link ID from the URL
+        const shortId = window.location.hash.substring(1);
 
-            document.getElementById('shortLink').textContent = shortLink;
+        // Fetch the short links data from JSON file
+        fetch('https://sahitya000.github.io/sub4sub/short_links.json')
+            .then(response => response.json())
+            .then(data => {
+                if (data[shortId]) {
+                    const { url } = data[shortId];
 
-            // Simulating short link creation (you can store this data in your backend or JSON)
-            console.log('Short link created:', shortLink);
-        });
+                    // Redirect the user after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = url;
+                    }, 2000);
+                } else {
+                    // Show error message if short ID not found
+                    document.getElementById('errorMessage').style.display = 'block';
+                }
+            });
     </script>
 </body>
 </html>
