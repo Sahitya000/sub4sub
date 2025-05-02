@@ -1,0 +1,39 @@
+name: Update Links via Issues
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  update-links:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.title, '[ShortLink]')
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Parse issue content
+        id: parse
+        run: |
+          echo "${{ github.event.issue.body }}" > temp.txt
+          SHORT=$(grep 'ShortCode:' temp.txt | cut -d':' -f2 | xargs)
+          LINK=$(grep 'YouTubeLink:' temp.txt | cut -d':' -f2- | xargs)
+          echo "short=$SHORT" >> $GITHUB_OUTPUT
+          echo "link=$LINK" >> $GITHUB_OUTPUT
+
+      - name: Update JSON
+        run: |
+          node -e "
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('data.json'));
+          data.links['${{ steps.parse.outputs.short }}'] = '${{ steps.parse.outputs.link }}';
+          fs.writeFileSync('data.json', JSON.stringify(data, null, 2));
+          "
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data.json
+          git commit -m "Added short link: ${{ steps.parse.outputs.short }}"
+          git push
