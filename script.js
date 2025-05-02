@@ -89,7 +89,9 @@ function showError(msg) {
 }
 
 function isValidLink(link) {
-    return /^https?:\/\//.test(link);  // Checks if the link is a valid URL (includes YouTube, Telegram, etc.)
+    // This function checks for the most common URL formats
+    const urlPattern = /^(https?:\/\/|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/[^\s]*)?$/;
+    return urlPattern.test(link);  // Checks if it's a valid URL (YouTube, Telegram, etc.)
 }
 
 function generateShortCode() {
