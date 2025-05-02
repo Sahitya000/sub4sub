@@ -1,4 +1,4 @@
-const GITHUB_REPO = "Sahitya000/sub4sub"; // 👈 change this
+const GITHUB_REPO = "Sahitya000/sub4sub"; // 👈 change this to your GitHub repo
 
 // Check if this is a short link visit
 if (window.location.hash.startsWith('#/s/')) {
@@ -24,13 +24,16 @@ function handleShortLinkRedirect() {
                     const redirectLink = document.getElementById('redirect-link');
                     redirectLink.href = originalLink;
 
-                    redirectLink.onclick = function(e) {
+                    // Auto redirect after 2 seconds
+                    setTimeout(() => redirectLink.click(), 2000);
+
+                    // Redirect button behavior
+                    redirectLink.onclick = function (e) {
                         e.preventDefault();
                         alert("You will be redirected shortly.");
                         window.location.href = originalLink;
                     };
 
-                    setTimeout(() => redirectLink.click(), 2000);
                 } else {
                     showError("Link not found in GitHub issue.");
                 }
@@ -45,7 +48,7 @@ function handleShortLinkRedirect() {
 }
 
 function createShortLink() {
-    const inputLink = document.getElementById('link-input').value.trim();  // Changed name to generalize
+    const inputLink = document.getElementById('link-input').value.trim();  // Generalized input for any link
     const resultDiv = document.getElementById('result');
 
     if (!isValidLink(inputLink)) {
@@ -63,10 +66,16 @@ function createShortLink() {
     resultDiv.innerHTML = `
         <h3>Your Short Link:</h3>
         <div class="short-link">${shortUrl}</div>
-        <button onclick="copyToClipboard('${shortUrl}')">Copy Link</button>
-        <p><a href="${issueUrl}" target="_blank">Click here to submit to GitHub (one-time)</a></p>
+        <button id="copyButton">Copy Link</button>
+        <p><a href="${issueUrl}" target="_blank" id="githubIssueLink">Click here to submit to GitHub (one-time)</a></p>
         <div class="note">Note: This will work globally once submitted.</div>
     `;
+
+    // Make the copy button work
+    const copyButton = document.getElementById('copyButton');
+    copyButton.addEventListener('click', function () {
+        copyToClipboard(shortUrl);
+    });
 }
 
 // Helpers
