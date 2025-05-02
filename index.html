@@ -24,8 +24,8 @@
         return;
       }
 
-      const id = Math.random().toString(36).substring(2, 8);
-      const shortLink = `${location.origin}/#${id}`;
+      const id = Math.random().toString(36).substring(2, 8);  // Random ID for short link
+      const shortLink = `${location.origin}/redirect.html#${id}`;  // Ensure the correct page and hash
       const jsonSnippet = `"${id}": {\n  "name": "${name}",\n  "url": "${url}"\n}`;
 
       document.getElementById("shortResult").textContent =
