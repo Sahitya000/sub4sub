@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unlock Link</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; }
+    button { padding: 10px 20px; margin: 10px; }
+    #finalLink { display: none; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Loading...</h2>
+
+  <script>
+    async function fetchShortLinks() {
+      const res = await fetch("https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/data/short_links.json");
+      return await res.json();
+    }
+
+    function startUnlock(link) {
+      let seconds = 10;
+      const timer = document.getElementById("timer");
+      const btn = document.getElementById("finalLink");
+
+      const interval = setInterval(() => {
+        timer.textContent = `Please wait ${seconds--} seconds...`;
+        if (seconds < 0) {
+          clearInterval(interval);
+          timer.textContent = "Unlocked!";
+          btn.style.display = "inline-block";
+        }
+      }, 1000);
+    }
+
+    window.onload = async function () {
+      const hash = location.hash.replace("#", "");
+      const data = await fetchShortLinks();
+
+      if (data[hash]) {
+        const name = data[hash].name;
+        const url = data[hash].url;
+
+        document.body.innerHTML = `
+          <h2>${name}</h2>
+          <p>Subscribe to unlock the download link</p>
+          <a href="https://youtube.com/@SKMods" target="_blank">
+            <button>Subscribe Channel</button>
+          </a>
+          <button onclick="startUnlock('${url}')">I’ve Subscribed</button>
+          <p id="timer"></p>
+          <a href="${url}" target="_blank" id="finalLink">
+            <button>Download Now</button>
+          </a>
+        `;
+      } else {
+        document.body.innerHTML = "<h3>Invalid or expired link</h3>";
+      }
+    };
+  </script>
+</body>
+</html>
