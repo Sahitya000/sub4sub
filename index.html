@@ -1,18 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Shortlink Generator</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔔 Join Channel to Unlock Download</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+        <style>
+    :root {
+    --primary: #6366f1;
+    --secondary: #7c3aed;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --bg: #f3f4f6;
+    --text-dark: #111827;
+    --text-light: #6b7280;
+    --card-bg: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.step {
+    background: #f9fafb;
+    border-left: 5px solid transparent;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.step.active {
+    border-left-color: var(--primary);
+    background: #eef2ff;
+}
+
+.step.completed {
+    border-left-color: var(--success);
+    background: #ecfdf5;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+    margin: 12px auto;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: block;
+    width: fit-content;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-join {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-join:hover {
+    background: #4f46e5;
+}
+
+.btn-download {
+    background: var(--success);
+    color: white;
+    display: none;
+    margin-top: 20px;
+}
+
+.status {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-size: 15px;
+}
+
+.status.verifying {
+    background: #fef9c3;
+    color: #92400e;
+}
+
+.status.success {
+    background: #dcfce7;
+    color: var(--success);
+    display: none;
+}
+
+.verification-timer {
+    background: var(--secondary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.timer {
+    text-align: center;
+    margin: 18px 0;
+    font-size: 15px;
+    color: var(--text-light);
+}
+
+#download-btn {
+    display: none;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    display: none;
+    z-index: 9999;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>🔗 Shortlink Generator</h1>
-    <input type="text" id="titleInput" placeholder="Link ka naam (e.g. Kinemaster APK)">
-    <input type="url" id="linkInput" placeholder="Download link">
-    <button id="generateBtn">Generate Shortlink</button>
-    <p id="shortResult"></p>
-  </div>
+    <div class="container">
+        <h1><i class="fab fa-youtube"></i> Unlock Your Download</h1>
+        
+        <div class="step" id="join-step">
+            <h3><span class="step-number">1</span> Join Our Channel</h3>
+            <p>Click below to join <span class="channel-name">Your Channel Name</span> on YouTube:</p>
+            <a href="https://www.youtube.com/channel/YOUR_CHANNEL_ID?sub_confirmation=1" 
+               target="_blank" 
+               class="btn btn-join" 
+               id="join-btn">
+               <i class="fab fa-youtube"></i> Subscribe Channel
+            </a>
+        </div>
+        
+        <div class="step" id="verify-step">
+            <h3><span class="step-number">2</span> Complete Verification</h3>
+            <div class="status verifying">
+                <p><i class="fas fa-circle-notch fa-spin"></i> Please wait: 
+                   <span class="verification-timer" id="verification-countdown">30</span> seconds</p>
+                
+            </div>
+            
+            <button id="verify-btn" class="btn btn-join">
+                <i class="fas fa-check-circle"></i> Verify Subscription
+            </button>
+        </div>
+        
+        <div id="timer" class="timer" style="display: none;">
+            <i class="fas fa-clock"></i> Download unlocks in: <span id="countdown">20</span> seconds
+        </div>
+        
+        <div id="success-status" class="status success">
+            <i class="fas fa-check-circle"></i> Verification complete! You can now download.
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="#" id="download-btn" class="btn btn-download">
+                <i class="fas fa-download"></i> Download Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-bell bell-icon"></i>
+        <span id="toast-message">Please subscribe and click bell icon first!</span>
+    </div>
+
+    <script>
+        // Configuration
+        const VERIFICATION_WAIT_TIME = 30; // 30 seconds mandatory wait
+        const COUNTDOWN_TIME = 20; // 20 seconds countdown
+        
+        // DOM Elements
+        const joinBtn = document.getElementById('join-btn');
+        const verifyBtn = document.getElementById('verify-btn');
+        const joinStep = document.getElementById('join-step');
+        const verifyStep = document.getElementById('verify-step');
+        const verificationCountdown = document.getElementById('verification-countdown');
+        const timerElement = document.getElementById('timer');
+        const countdownElement = document.getElementById('countdown');
+        const successStatus = document.getElementById('success-status');
+        const downloadBtn = document.getElementById('download-btn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+        
+        // State management
+        let hasJoined = false;
+        let isVerifying = false;
+        let verificationTimer;
+        let countdownTimer;
+        let verificationSecondsLeft = VERIFICATION_WAIT_TIME;
+        
+        // 📁 Load links from JSON
+        async function loadLinks() {
+            try {
+                const response = await fetch('links.json');
+                return await response.json();
+            } catch (error) {
+                console.error("Using fallback links:", error);
+                return {
+                    "test": "https://example.com/your-download-link"
+                };
+            }
+        }
+        
+        // 🔗 Get original URL from shortlink
+        async function getOriginalUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const shortLink = params.get('l');
+            const links = await loadLinks();
+            return links[shortLink] || '#';
+        }
+        
+        // 🕒 Start verification wait timer
+        function startVerificationWait() {
+            verifyBtn.style.display = 'inline-block';
+            verifyStep.classList.add('active');
+            
+            verificationTimer = setInterval(() => {
+                verificationSecondsLeft--;
+                verificationCountdown.textContent = verificationSecondsLeft;
+                
+                if (verificationSecondsLeft <= 0) {
+                    clearInterval(verificationTimer);
+                    enableVerification();
+                }
+            }, 1000);
+        }
+        
+        // ✅ Enable verification button
+        function enableVerification() {
+            verifyBtn.disabled = false;
+            verificationCountdown.textContent = "Ready!";
+            verificationCountdown.style.background = "#4CAF50";
+        }
+        
+        // ⏳ Start download countdown
+        function startDownloadCountdown() {
+            let seconds = COUNTDOWN_TIME;
+            timerElement.style.display = 'block';
+            
+            countdownTimer = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownTimer);
+                    showDownload();
+                }
+            }, 1000);
+        }
+        
+        // 🔓 Show download button
+        async function showDownload() {
+            timerElement.style.display = 'none';
+            successStatus.style.display = 'block';
+            downloadBtn.href = await getOriginalUrl();
+            downloadBtn.style.display = 'inline-block';
+        }
+        
+        // 🍞 Show toast notification
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+        
+        // 🎯 Event Listeners
+        joinBtn.addEventListener('click', function() {
+            hasJoined = true;
+            joinStep.classList.add('completed');
+            startVerificationWait();
+        });
+        
+        verifyBtn.addEventListener('click', function() {
+            if (verificationSecondsLeft > 0) {
+                showToast("Please wait " + verificationSecondsLeft + " more seconds and click the bell icon 🔔");
+                return;
+            }
+            
+            verifyStep.classList.remove('active');
+            verifyStep.classList.add('completed');
+            verifyBtn.disabled = true;
+            startDownloadCountdown();
+        });
+
+        // Prevent window close during verification
+        window.addEventListener('beforeunload', function(e) {
+            if (hasJoined && !downloadBtn.style.display) {
+                e.preventDefault();
+                e.returnValue = 'Are you sure you want to leave? Your download is not ready yet.';
+            }
+        });
+    </script>
 </body>
 </html>
