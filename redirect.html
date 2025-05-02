@@ -1,61 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Unlock Link</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; padding: 20px; }
-    button { padding: 10px 20px; margin: 10px; }
-    #finalLink { display: none; margin-top: 20px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
 </head>
 <body>
-  <h2>Loading...</h2>
+    <h1>Redirecting to Original Link</h1>
+    <div id="subscriptionStatus">
+        <p>Please subscribe to the channel to access the download link.</p>
+        <button id="subscribeButton">Subscribe</button>
+    </div>
+    <div id="downloadLink" style="display: none;">
+        <p>Here is your download link:</p>
+        <a href="" id="actualLink">Download Now</a>
+    </div>
 
-  <script>
-    async function fetchShortLinks() {
-      const res = await fetch("https://raw.githubusercontent.com/sahitya000/YOUR_REPO/main/data/short_links.json");
-      return await res.json();
-    }
+    <script>
+        const shortId = window.location.hash.substring(1);
+        
+        fetch('https://sahitya000.github.io/your-repo-name/short_links.json')
+            .then(response => response.json())
+            .then(data => {
+                if (data[shortId]) {
+                    const { name, url } = data[shortId];
+                    document.getElementById('actualLink').href = url;
+                } else {
+                    alert('Short link not found!');
+                }
+            });
 
-    function startUnlock(link) {
-      let seconds = 10;
-      const timer = document.getElementById("timer");
-      const btn = document.getElementById("finalLink");
-
-      const interval = setInterval(() => {
-        timer.textContent = `Please wait ${seconds--} seconds...`;
-        if (seconds < 0) {
-          clearInterval(interval);
-          timer.textContent = "Unlocked!";
-          btn.style.display = "inline-block";
-        }
-      }, 1000);
-    }
-
-    window.onload = async function () {
-      const hash = location.hash.replace("#", "");
-      const data = await fetchShortLinks();
-
-      if (data[hash]) {
-        const name = data[hash].name;
-        const url = data[hash].url;
-
-        document.body.innerHTML = `
-          <h2>${name}</h2>
-          <p>Subscribe to unlock the download link</p>
-          <a href="https://youtube.com/@SKMods" target="_blank">
-            <button>Subscribe Channel</button>
-          </a>
-          <button onclick="startUnlock('${url}')">I’ve Subscribed</button>
-          <p id="timer"></p>
-          <a href="${url}" target="_blank" id="finalLink">
-            <button>Download Now</button>
-          </a>
-        `;
-      } else {
-        document.body.innerHTML = "<h3>Invalid or expired link</h3>";
-      }
-    };
-  </script>
+        document.getElementById('subscribeButton').addEventListener('click', function() {
+            // Simulating subscription (this part should be connected to actual subscription check)
+            document.getElementById('subscriptionStatus').style.display = 'none';
+            document.getElementById('downloadLink').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
