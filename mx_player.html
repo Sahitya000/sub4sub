@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>InstaGold_v9.90</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="https://instagold.download/favicon.ico" type="image/x-icon">
+
+  <!-- Meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="robots" content="index,follow"/>
+  <meta name="description" content="InstaGold_v9.90 is a modified Instagram app with features like downloading photos, hiding online status, and more."/>
+  <meta name="keywords" content="Instagram Plus, InstaGold, modified Instagram"/>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="GoldFire"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://instagold.ogwhats.me"/>
+  <meta property="og:title" content="InstaGold_v9.90"/>
+  <meta property="og:description" content="Download InstaGold_v9.90 – A powerful modified Instagram with unique features."/>
+  <meta property="og:image" content="app_icon2.png"/>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #333;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+      padding: 20px 0;
+      text-align: center;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+
+    p {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+
+    .content {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+    }
+
+    .app-logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 20px;
+    }
+
+    .file-box {
+      display: flex;
+      align-items: center;
+      background-color: #28a745;
+      color: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+
+    .file-box:hover {
+      background-color: #218838;
+    }
+
+    .file-box img {
+      width: 50px;
+      height: 50px;
+      margin-right: 20px;
+    }
+
+    .file-box .text {
+      text-align: left;
+    }
+
+    .file-box .title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .file-box .size {
+      font-size: 14px;
+      color: #eaeaea;
+    }
+
+    .download-btn {
+      display: block;
+      margin: 30px auto;
+      background: linear-gradient(to right, #28a745, #218838);
+      color: white;
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 50px;
+      border: none;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(to right, #218838, #1e7e34);
+    }
+
+    .countdown-box {
+      background: #ffcc00;
+      color: #333;
+      padding: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      background: #fff;
+      margin-top: 40px;
+      border-top: 1px solid #ddd;
+      color: #888;
+    }
+
+    footer a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media screen and (max-width: 600px) {
+      .content {
+        padding: 20px;
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .file-box {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+      }
+
+      .file-box img {
+        margin-bottom: 10px;
+      }
+
+      .download-btn {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 0;
+      }
+    }
+  </style>
+
+  <script>
+    function startCountdown() {
+      document.getElementById("fileInfoBox").style.display = "none";
+      var counter = 6;
+      var countdownBox = document.getElementById("countdownBox");
+      var finalBtn = document.getElementById("finalDownloadBox");
+
+      countdownBox.style.display = "block";
+      countdownBox.innerText = "⏳ Please wait " + counter + " seconds...";
+
+      var interval = setInterval(function () {
+        counter--;
+        countdownBox.innerText = "⏳ Please wait " + counter + " seconds...";
+
+        if (counter === 0) {
+          clearInterval(interval);
+          countdownBox.style.display = "none";
+          finalBtn.style.display = "block";
+        }
+      }, 1000);
+    }
+
+    function redirectWithAd() {
+      // Open Adsterra link in new tab
+      window.open("https://deceivedaisle.com/txub2rt1xd?key=2505311d9800b2d3cd3bd8ebafe875f5", "_blank");
+      // Redirect to download after 5 seconds
+      setTimeout(function () {
+        window.location.href = "https://dlll.apkm.app/instagold/9.90/InstaGold_v9.90.apk";
+      }, 5000);
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>Download InstaGold</h1>
+    <p>Latest version | Safe & Direct Download</p>
+  </header>
+
+  <main class="content">
+    <div class="app-info">
+      <img src="instagold.png" alt="InstaGold" class="app-logo" />
+      <p>Instagram Gold is a modified version of the official Instagram app with features like downloading media, hiding online status, and customizing the interface.</p>
+
+      <a href="javascript:void(0);" onclick="startCountdown()" id="fileInfoBox" class="file-box">
+        <img src="app_icon.png" alt="icon">
+        <div class="text">
+          <div class="title">InstaGold_v9.90</div>
+          <div class="size">Download file size (109MB)</div>
+        </div>
+      </a>
+
+      <div id="countdownBox" class="countdown-box"></div>
+
+      <a href="javascript:void(0);" onclick="redirectWithAd()" id="finalDownloadBox" class="download-btn" style="display: none;">Download Now ⬇️</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 All rights reserved</p>
+    <nav>
+      <a href="/privacy-policy.html">Privacy Policy</a> |
+      <a href="/terms.html">Terms of Use</a> |
+      <a href="/about.html">About Us</a>
+    </nav>
+  </footer>
+</body>
+</html>
